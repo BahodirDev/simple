@@ -6,7 +6,8 @@
 }
 
 .App {
-  display: flex;
+  display: grid;
+  grid-template-columns: 16.2% 83.8%;
   text-align: center;
 }
 
