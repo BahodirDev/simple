@@ -71,12 +71,12 @@ function Dashboard(props) {
             <SimNavbar />
             <div className="inp_box">
                 <form className='dd_form'>
-                    <input type="text" value={name1} onChange={e => setName1(e.target.value)} className='form-control m-1' placeholder='name1' />
-                    <input type="text" value={name2} onChange={e => setName2(e.target.value)} className='form-control m-1' placeholder='name2' />
-                    <input type="text" value={name3} onChange={e => setName3(e.target.value)} className='form-control m-1' placeholder='name3' />
-                    <input type="text" value={name4} onChange={e => setName4(e.target.value)} className='form-control m-1' placeholder='name4' />
-                    <input type="text" value={name5} onChange={e => setName5(e.target.value)} className='form-control m-1' placeholder='name5' />
-                    <input type="text" value={name6} onChange={e => setName6(e.target.value)} className='form-control m-1' placeholder='name6' />
+                    <input type="text" value={name1} onChange={e => setName1(e.target.value)} className='form-control m-1' placeholder='Name' />
+                    <input type="text" value={name2} onChange={e => setName2(e.target.value)} className='form-control m-1' placeholder='Last name' />
+                    <input type="text" value={name3} onChange={e => setName3(e.target.value)} className='form-control m-1' placeholder='Father name' />
+                    <input type="text" value={name4} onChange={e => setName4(e.target.value)} className='form-control m-1' placeholder='Telefon raqam' />
+                    <input type="text" value={name5} onChange={e => setName5(e.target.value)} className='form-control m-1' placeholder='Email' />
+                    <input type="text" value={name6} onChange={e => setName6(e.target.value)} className='form-control m-1' placeholder='Address' />
                     <input type="hidden" onChange={e => setDate1(date)} />
                     <button className='dd-btn btn btn-outline-dark' onClick={addUser}>ADD</button>
                 </form>
