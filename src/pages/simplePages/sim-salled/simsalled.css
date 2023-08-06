@@ -1,0 +1,11 @@
+.date{
+    width: 95%;
+    height: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.date h6{
+    margin-top: 8px;
+}
