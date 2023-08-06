@@ -10,7 +10,7 @@ function Admin(props) {
         e.preventDefault()
         let admin = {name:name,login:login,password:password,status:"simple",id:1}
         localStorage.setItem("admin", JSON.stringify(admin))
-        navigate(`/admin/dashboard`)
+        navigate(`/admin/simple`)
     }
     return (
         <div className='simple'>
