@@ -10,12 +10,15 @@ import Simple from './pages/simplePages/simple/Simple';
 import Navbar from './pages/navbar/Navbar';
 import Dashboard from './pages/simplePages/simpleDashboard/Dashboard';
 import Admin from './pages/adminPages/admin/Admin';
-import Super from './pages/super-admin/Super';
 import AdminProtected from './pages/adminPages/admin-protected/AdminProtected';
 import AdminDedline from './pages/adminPages/admin-dedline/AdminDedline';
 import AdminSimple from './pages/adminPages/admin-simple/AdminSimple';
 import AdminRufused from './pages/adminPages/admin-rufused/AdminRufused';
 import DailySales from './pages/adminPages/admin-dailysales/DailySales';
+import SuperAdminProtected from './pages/SuperAdminPages/SuperAdminProtected/SuperAdminProtected';
+import SuperAdminDashboard from './pages/SuperAdminPages/superAdminDashboard/SuperAdminDashboard';
+import Super from './pages/SuperAdminPages/super-admin/Super';
+import AddWorker from './pages/SuperAdminPages/s-a-add-worker/AddWorker';
 
 function App() {
   return (
@@ -35,6 +38,10 @@ function App() {
             <Route path='dedline' element={<AdminDedline/>}/>
             <Route path='day' element={<DailySales/>}/>
             <Route path='rufused' element={<AdminRufused/>}/>
+        </Route>
+        <Route path='/super-admin' element={<SuperAdminProtected/>}>
+            <Route path='dashboard' element={<SuperAdminDashboard/>}/>
+            <Route path='add-worker' element={<AddWorker/>}/>
         </Route>
         <Route path='/admin-log' element={<Admin />} />
         <Route path='/simple-log' element={<Simple />} />
