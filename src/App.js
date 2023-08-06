@@ -11,7 +11,6 @@ import SimSalled from './pages/simplePages/sim-salled/SimSalled';
 import SimLocatinon from './pages/simplePages/sim-location/SimLocatinon';
 import SimUnconnect from './pages/simplePages/sim-unconnect/SimUnconnect';
 import SimRefused from './pages/simplePages/sim-refused/SimRefused';
-import AdminDashboard from './pages/adminPages/admindashboard/AdminDashboard';
 import AdminProtected from './pages/adminPages/admin-protected/AdminProtected';
 import AdminDedline from './pages/adminPages/admin-dedline/AdminDedline';
 import AdminSimple from './pages/adminPages/admin-simple/AdminSimple';
