@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './dashboard.css';
 import SimNavbar from '../simplenav/SimNavbar';
 
 function Dashboard(props) {
+
+
+    // massiv
+    const [users, setUsers] = useState([]);
+
     const [name1, setName1] = useState();
     const [name2, setName2] = useState();
     const [name3, setName3] = useState();
@@ -12,10 +17,55 @@ function Dashboard(props) {
     const [date1, setDate1] = useState();
     let date = new Date()
 
-    let users = [
-        { name1: "Abduvohid", name2: "Abduvohid", name3: "Abduvohid", name4: "Abduvohid", name5: "Abduvohid", name6: "Abduvohid" },
-        { name1: "Abduvohid", name2: "Abduvohid", name3: "Abduvohid", name4: "Abduvohid", name5: "Abduvohid", name6: "Abduvohid" }
-    ]
+
+    useEffect(() => {
+        const storedUsers = localStorage.getItem('users');
+        if (storedUsers) {
+            setUsers(JSON.parse(storedUsers));
+        }
+    }, []);
+
+
+
+    const addUser = (e) => {
+        e.preventDefault();
+        const newUser = {
+            id: Date.now(),
+            name1,
+            name2,
+            name3,
+            name4,
+            name5,
+            name6,
+        };
+        const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+        const updatedUsers = [...existingUsers, newUser];
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        setUsers(updatedUsers);
+    };
+
+
+    const changeStatus = (id, type) => {
+        console.log('work');
+        const newUser = { ...id, time: Date.now() };
+
+        const existingArray = JSON.parse(localStorage.getItem(type)) || [];
+        existingArray.push(newUser);
+        localStorage.setItem(type, JSON.stringify(existingArray));
+
+        // Retrieve users from localStorage and filter out the user with the provided id
+     
+        const updatedUsers = users.filter((user) => user.id != id.id);
+
+        console.log({updatedUsers});
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+    };
+
+
+
+
+
+
     return (
         <div className='dashboard'>
             <SimNavbar />
@@ -28,20 +78,19 @@ function Dashboard(props) {
                     <input type="text" value={name5} onChange={e => setName5(e.target.value)} className='form-control m-1' placeholder='name5' />
                     <input type="text" value={name6} onChange={e => setName6(e.target.value)} className='form-control m-1' placeholder='name6' />
                     <input type="hidden" onChange={e => setDate1(date)} />
-                    <button className='dd-btn btn btn-outline-dark'>ADD</button>
+                    <button className='dd-btn btn btn-outline-dark' onClick={addUser}>ADD</button>
                 </form>
             </div>
             <div className="users">
                 <h1>Haridor</h1>
                 <div className="dd-users">
                     <div className='dd-names'>
-                        <h4>Name1</h4>
-                        <h4>Name2</h4>
-                        <h4>Name3</h4>
-                        <h4>Name4</h4>
-                        <h4>Name5</h4>
-                        <h4>Name6</h4>
-                        <h4>Selection</h4>
+                        <h4>Ism</h4>
+                        <h4>Familiya</h4>
+                        <h4>Otasining ismi</h4>
+                        <h4>tel1</h4>
+                        <h4>email</h4>
+                        <h4>address</h4>
                     </div>
                     {
                         users?.map((e, idx) => {
@@ -58,19 +107,12 @@ function Dashboard(props) {
                                             Sotilgan
                                         </button>
                                         <ul className="dropdown-menu">
-                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100'>Sotilgan</button></a></li>
-                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100'>Uchrashuv</button></a></li>
-                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100'>Bog'lanib bo'lmadi</button></a></li>
-                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100'>Rad etilgan</button></a></li>
+                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100' onClick={() => changeStatus(e, 'sotilgan')} >Sotilgan</button></a></li>
+                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100' onClick={() => changeStatus(e, 'uchrashuv')} >Uchrashuv</button></a></li>
+                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100' onClick={() => changeStatus(e, 'bolmadi')} >Bog'lanib bo'lmadi</button></a></li>
+                                            <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100' onClick={() => changeStatus(e, 'rad')} >Rad etilgan</button></a></li>
                                         </ul>
                                     </div>
-
-                                    {/* <div className="dd-btns">
-                                        
-                                        
-                                        
-                                        
-                                    </div> */}
                                 </div>
                             )
                         })
