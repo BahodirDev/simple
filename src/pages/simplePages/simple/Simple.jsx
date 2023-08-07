@@ -8,13 +8,18 @@ function Simple(props) {
     const [password, setPassword] = useState();
     const navigate = useNavigate()
     function Login(e) {
+        console.log('work');
         e.preventDefault()
         const users = JSON.parse(localStorage.getItem('hodimlar'));
-        const user1 = users.filter(users => users.login === login)
+        if(!users?.length){
+            alert('Hodim kiriting');
+            return;
+        }
+        const user1 = users?.filter(users => users.login === login)
         if (user1[0].password == password) {
-            if(user1[0].status == 'simple'){
+            if (user1[0].status == 'simple') {
                 navigate(`/simple/dashboard`)
-            }else{
+            } else {
                 alert(`Siz odiy hodim emasiz`)
             }
         } else {
