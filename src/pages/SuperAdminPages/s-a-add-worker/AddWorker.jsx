@@ -3,9 +3,9 @@ import SuperAdminNav from '../SuperAdminNav/SuperAdminNav';
 import './addworker.css'
 
 function AddWorker(props) {
-    const [name, setName] = useState();
-    const [login, setLogin] = useState();
-    const [password, setPassword] = useState();
+    const [name, setName] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
     const [name1, setName1] = useState();
     const [login1, setLogin1] = useState();
     const [password1, setPassword1] = useState();
@@ -20,6 +20,10 @@ function AddWorker(props) {
     }, []);
 
     const addUser = (e) => {
+        if (!name.length || !login.length || !password.length) {
+            alert('Maluotlarni to`liq shaklda kiriting');
+            return
+        }
         e.preventDefault();
         const newUser = {
             id: Date.now(),
@@ -39,7 +43,7 @@ function AddWorker(props) {
             if (s.id == id) {
                 return {
                     ...s,
-                    status:type,
+                    status: type,
                 }
             } else {
                 return s
@@ -47,18 +51,17 @@ function AddWorker(props) {
         });
         localStorage.setItem('hodimlar', JSON.stringify(newMass));
         setUsers(newMass);
-        console.log('salom');
 
     };
-    
+
     const Edit = (id) => {
         let newMass = users?.map((s) => {
             if (s.id == id) {
                 return {
                     ...s,
-                    name:name1,
-                    login1:login1,
-                    password1:password1,
+                    name: name1,
+                    login1: login1,
+                    password1: password1,
                 }
             } else {
                 return s
@@ -68,10 +71,11 @@ function AddWorker(props) {
         setUsers(newMass);
     };
 
-    function Delete(id){
+    function Delete(id) {
         let users = JSON.parse(localStorage.getItem('hodimlar'))
-        let newMass = users.filter(users=> users.id != id )
+        let newMass = users.filter(users => users.id != id)
         localStorage.setItem('hodimlar', JSON.stringify(newMass));
+        window.location.reload();
     }
 
     return (
@@ -126,10 +130,10 @@ function AddWorker(props) {
                                         <li><input type="text" value={name1} className='form-control' onChange={(e) => setName1(e.target.value)} /></li>
                                         <li><input type="text" value={login1} className='form-control' onChange={(e) => setLogin1(e.target.value)} /></li>
                                         <li><input type="password" value={password1} className='form-control' onChange={(e) => setPassword1(e.target.value)} /></li>
-                                        <li><button className='btn btn-outline-dark' onClick={()=>Edit(e.id)}>Edit</button></li>
+                                        <li><button className='btn btn-outline-dark' onClick={() => Edit(e.id)}>Edit</button></li>
                                     </ul>
                                 </div>
-                                <button className='btn btn-outline-dark' onClick={()=>{Delete(e.id)}}>Delete</button>
+                                <button className='btn btn-outline-dark' onClick={() => { Delete(e.id) }}>Delete</button>
                             </div>
                         )
                     })

@@ -11,20 +11,24 @@ function Simple(props) {
         console.log('work');
         e.preventDefault()
         const users = JSON.parse(localStorage.getItem('hodimlar'));
-        if(!users?.length){
+        if (!users?.length) {
             alert('Hodim kiriting');
             return;
         }
-        const user1 = users?.filter(users => users.login === login)
-        if (user1[0].password == password) {
-            if (user1[0].status == 'simple') {
-                navigate(`/simple/dashboard`)
-            } else {
-                alert(`Siz odiy hodim emasiz`)
+        const user1 = users?.filter(users => users.status == 'simple')
+        
+        let userLogin = user1?.filter(s => s.login == login);
+        if(userLogin?.length){
+            let userpassword = user1?.filter(s => s.password == password);
+            if(!userpassword.length){
+                alert('Login yoki Password xato')
+                return
             }
-        } else {
-            alert(`Password noto'g'ri`)
+        }else{
+            alert("Bunday hodim mavjud emas")
+            return
         }
+        navigate('/simple/dashboard')
     }
     return (
         <div className='simple'>

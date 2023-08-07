@@ -7,10 +7,27 @@ function Admin(props) {
     const [password,setPassword] = useState();
     const navigate = useNavigate()
     function Login(e) {
+        console.log('work');
         e.preventDefault()
-        let admin = {name:name,login:login,password:password,status:"simple",id:1}
-        localStorage.setItem("admin", JSON.stringify(admin))
-        navigate(`/admin/simple`)
+        const users = JSON.parse(localStorage.getItem('hodimlar'));
+        if (!users?.length) {
+            alert('Hodim kiriting');
+            return;
+        }
+        const user1 = users?.filter(users => users.status == 'admin')
+        
+        let userLogin = user1?.filter(s => s.login == login);
+        if(userLogin?.length){
+            let userpassword = user1?.filter(s => s.password == password);
+            if(!userpassword.length){
+                alert('Login yoki Password xato')
+                return
+            }
+        }else{
+            alert("Bunday hodim mavjud emas")
+            return
+        }
+        navigate('/admin/simple')
     }
     return (
         <div className='simple'>

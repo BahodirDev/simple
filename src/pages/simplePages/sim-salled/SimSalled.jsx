@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import SimNavbar from '../simplenav/SimNavbar';
 import './simsalled.css'
 import moment from 'moment/moment';
+import AdminNav from '../../adminPages/adminNav/AdminNav';
 
-function SimSalled(props) {
+function SimSalled({ isAdmin }) {
 
     const [users, setUsers] = useState([]);
 
@@ -44,7 +45,15 @@ function SimSalled(props) {
 
     return (
         <div className='dashboard'>
-            <SimNavbar />
+            {
+                isAdmin
+                    ?
+                    <AdminNav />
+                    :
+
+                    <SimNavbar />
+
+            }
             <h1>Sotilgan</h1>
             <div className="users">
                 <div className="dd-users">

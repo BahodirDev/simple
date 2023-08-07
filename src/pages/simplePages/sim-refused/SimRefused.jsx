@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SimNavbar from '../simplenav/SimNavbar';
+import AdminNav from '../../adminPages/adminNav/AdminNav';
 
-function SimRefused(props) {
+function SimRefused({ isAdmin }) {
     const [users, setUsers] = useState([]);
     // state
     const [sabab, setSabab] = useState('');
@@ -49,7 +50,15 @@ function SimRefused(props) {
 
     return (
         <div className='dashboard'>
-            <SimNavbar />
+            {
+                isAdmin
+                    ?
+                    <AdminNav />
+                    :
+
+                    <SimNavbar />
+
+            }
 
             <div className="users">
                 <h1>Bog'lanilmaganlar</h1>
@@ -80,7 +89,7 @@ function SimRefused(props) {
                                                 </button>
                                                 <ul className="dropdown-menu">
                                                     <li><a className="dropdown-item" href="#">
-                                                        <input type="text" placeholder='Sababni kiriting' className='form-control' onChange={e=>setSabab(e.target.value)} />
+                                                        <input type="text" placeholder='Sababni kiriting' className='form-control' onChange={e => setSabab(e.target.value)} />
                                                     </a></li>
                                                     <li><a className="dropdown-item" href="#"><button className='btn btn-outline-dark w-100' onClick={() => insertparam(e.id)} >Kiritish</button></a></li>
                                                 </ul>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import AdminNav from '../adminNav/AdminNav';
-import SuperAdminNav from '../../SuperAdminPages/SuperAdminNav/SuperAdminNav';
+import SuperAdminNav from '../SuperAdminNav/SuperAdminNav';
+import './addworker.css'
 
-function AdminSimple(props) {
+function SuperSimple(props) {
     const [name, setName] = useState('');
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ function AdminSimple(props) {
     useEffect(() => {
         const storedUsers = localStorage.getItem('hodimlar');
         if (storedUsers) {
-            setUsers(JSON.parse(storedUsers)?.filter(s => s.status == 'simple'));
+            setUsers(JSON.parse(storedUsers)?.filter(s=>s.status == 'simple'));
         }
     }, [localStorage.getItem('hodimlar')]);
 
@@ -62,7 +62,7 @@ function AdminSimple(props) {
 
     return (
         <div>
-            <AdminNav />
+            <SuperAdminNav />
             <h3 className='mt-3'>Hodim qo'shish</h3>
             <div className="dd-users">
                 <div className='dd-names'>
@@ -108,4 +108,4 @@ function AdminSimple(props) {
     );
 }
 
-export default AdminSimple;
+export default SuperSimple;
